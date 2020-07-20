@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'PagesController@index')->name('home');
+Route::get('/news', 'PagesController@news')->name('news');
+Route::get('/tour', 'PagesController@tour')->name('tour');
+Route::get('/media', 'PagesController@media')->name('media');
+Route::get('/contact', 'PagesController@contact')->name('contact');
