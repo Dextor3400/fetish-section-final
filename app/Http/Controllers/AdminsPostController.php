@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminsPostController extends Controller
 {
@@ -14,7 +15,9 @@ class AdminsPostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::orderBy('created_at', 'DESC')->paginate(10);
+
+        return view('admin.posts.index',compact('posts'));
     }
 
     /**
@@ -24,7 +27,7 @@ class AdminsPostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -35,7 +38,22 @@ class AdminsPostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = request()->validate([
+            'title'=>'required|max:255',
+            'post_image'=>'file',
+            'body'=>'required'
+        ]);
+        if ($file =  $request->file('post_image')) {
+         $inputs['post_image'] = $file->getClientOriginalName();
+         $file->move(public_path('images'), $inputs['post_image']);
+         $request->post_image = $inputs['post_image'];
+        }
+
+        auth()->user()->posts()->create($inputs);
+
+        Session::flash('postCreatedMessage', 'Post was created');
+
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -46,7 +64,7 @@ class AdminsPostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.posts.show',compact('post'));
     }
 
     /**
@@ -57,7 +75,7 @@ class AdminsPostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('admin.posts.edit',compact('post'));
     }
 
     /**
@@ -69,7 +87,26 @@ class AdminsPostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $inputs = request()->validate([
+            'title'=>'required|max:255',
+            'post_image'=>'file',
+            'body'=>'required'
+        ]);
+
+        if ($file =  $request->file('post_image')) {
+         $inputs['post_image'] = $file->getClientOriginalName();
+         $file->move(public_path('images'), $inputs['post_image']);
+         $post->post_image = $inputs['post_image'];
+        }
+
+        $post->title = $inputs['title'];
+        $post->body = $inputs['body'];
+
+        $post->update();
+
+        Session::flash('postUpdatedMessage', 'Post was updated');
+
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -80,6 +117,10 @@ class AdminsPostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
+
+        Session::flash('postDeletedMessage', 'Post was deleted');
+
+        return redirect()->route('admin.posts.index');
     }
 }

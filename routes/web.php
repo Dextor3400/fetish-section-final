@@ -34,3 +34,14 @@ Route::get('/admin/posts/{post}','AdminsPostController@show')->name('admin.posts
 Route::get('/admin/posts/{post}/edit','AdminsPostController@edit')->name('admin.posts.edit');
 Route::put('/admin/posts/{post}/update','AdminsPostController@update')->name('admin.posts.update');
 Route::delete('/admin/posts/{post}/destroy','AdminsPostController@destroy')->name('admin.posts.destroy');
+
+Route::get('/admin/concerts','AdminsConcertController@index')->name('admin.concerts.index');
+Route::get('/admin/concerts/create','AdminsConcertController@create')->name('admin.concerts.create');
+Route::post('/admin/concerts','AdminsConcertController@store')->name('admin.concerts.store');
+Route::get('/admin/concerts/{concert}','AdminsConcertController@show')->name('admin.concerts.show');
+Route::get('/admin/concerts/{concert}/edit','AdminsConcertController@edit')->name('admin.concerts.edit');
+Route::put('/admin/concerts/{concert}/update','AdminsConcertController@update')->name('admin.concerts.update');
+Route::delete('/admin/concerts/{concert}/destroy','AdminsConcertController@destroy')->name('admin.concerts.destroy');
+
+Route::get('/admin/media/{media}/edit','AdminsMediaController@edit')->name('admin.media.edit');
+Route::put('/admin/media/{media}/update','AdminsMediaController@update')->name('admin.media.update');

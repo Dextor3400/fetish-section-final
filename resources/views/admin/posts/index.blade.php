@@ -41,9 +41,26 @@
                         </tr>
                     </tfoot>
                     <tbody>
+                            @foreach ($posts as $post)
                             <tr>
-
+                                <td class="align-middle">{{ $post->id }}</td>
+                                <td class="align-middle">{{ $post->user->name }}</td>
+                                <td class="align-middle"><a href="{{ route('admin.posts.show',$post->id) }}">{{ $post->title }}</a></td>
+                                <td class="align-middle">
+                                    <img height="40px" src="{{ $post->post_image }}"  alt="Post Image" srcset="">
+                                </td>
+                                <td class="align-middle">{{ $post->created_at->diffForHumans() }}</td>
+                                <td class="align-middle">{{ $post->updated_at->diffForHumans() }}</td>
+                                <td class="align-middle"><a class="btn btn-primary" href="{{ route('admin.posts.edit',$post->id) }}">Edit</a></td>
+                                <td class="align-middle">
+                                    <form action="{{ route('admin.posts.destroy',$post->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
+                        @endforeach
                     </tbody>
                     </table>
                 </div>
