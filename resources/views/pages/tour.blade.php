@@ -28,17 +28,17 @@
                         </tr>
                     </tfoot>
                     <tbody>
-
+                        @foreach ($concerts as $concert)
                         <tr>
-                            <td class="align-middle">.</td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle"></td>
-                            <td class="align-middle">.,- Ft</td>
-                            <td class="align-middle">.,- Ft</td>
-                            <td class="align-middle"><a class="btn btn-primary align-middle" target="_blank" href="">More info</a></td>
+                            <td class="align-middle">{{ $concert->date }}.</td>
+                            <td class="align-middle">{{ $concert->venue }}</td>
+                            <td class="align-middle">{{ $concert->open }}</td>
+                            <td class="align-middle">{{ $concert->start }}</td>
+                            <td class="align-middle">{{ $concert->price_advance }}.,- Ft</td>
+                            <td class="align-middle">{{ $concert->price_onsite }}.,- Ft</td>
+                            <td class="align-middle"><a class="btn btn-primary align-middle" target="_blank" href="{{ $concert->more_info }}">More info</a></td>
                         </tr>
-
+                        @endforeach
                     </tbody>
                 </table>
             </div>

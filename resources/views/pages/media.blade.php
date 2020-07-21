@@ -7,10 +7,10 @@
             <div class="row">
                 <div class="col-12 col-md-6 d-flex justify-content-center align-items-center flex-column">
                     <h1 class="h1">About us</h1>
-                    <p></p>
+                    <p>{!! $data->about_text !!}</p>
                 </div>
                 <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
-                    <img src="" alt="band photo" class="img-fluid">
+                    <img src="{{ $data->about_image }}" alt="band photo" class="img-fluid">
                 </div>
             </div>
         </section>
@@ -20,14 +20,14 @@
             <div class="row">
                 <div class="col-12 col-md-6 mb-3">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src=""
+                        <iframe class="embed-responsive-item" src="{{ $data->video_one }}"
                             allowfullscreen>
                         </iframe>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="embed-responsive embed-responsive-16by9">
-                        <iframe class="embed-responsive-item" src=""
+                        <iframe class="embed-responsive-item" src="{{ $data->video_two }}"
                             allowfullscreen>
                         </iframe>
                     </div>
@@ -40,13 +40,13 @@
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img class="d-block w-100" src="" alt="First slide">
+                        <img class="d-block w-100" src="{{ $data->photo_one }}" alt="First slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="" alt="Second slide">
+                        <img class="d-block w-100" src="{{ $data->photo_two }}" alt="Second slide">
                     </div>
                     <div class="carousel-item">
-                        <img class="d-block w-100" src="" alt="Third slide">
+                        <img class="d-block w-100" src="{{ $data->photo_three }}" alt="Third slide">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -61,4 +61,3 @@
         </section>
     @endsection
 </x-user-master>
-
