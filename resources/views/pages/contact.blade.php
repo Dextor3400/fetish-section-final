@@ -2,7 +2,6 @@
     @section('title', 'Contact')
     @section('content')
         <!-------------------------------------CONTACT FORM------------------------------------->
-
         <h1 class="display-4 text-center my-5">Contact Us</h1>
         <h3 class="h3 text-center my-4">DROP US A LINE:</h3>
         <form class="mb-5">
